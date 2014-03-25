@@ -1,0 +1,27 @@
+extends layout
+
+block content
+	h1.
+		Viewing Deck #{deck}
+	
+	#cards
+		h2 Cards
+		h3: a(href="/rundeck/#{deck}") Run Deck
+		table
+			thead
+				th Key
+				th Answer
+				th Queue Number
+				th Delete?
+			each card, i in cardlist
+				tr
+					td #{card.key}
+					td #{card.answer}
+					td #{card.queue}
+					td: a(href="/deletecard/#{deck}/#{card._id}") Delete
+		#addcard
+			form(name="newcard", action="/addcard", method="post")
+				input(type="text", name="key", placeholder="Card Key")
+				input(type="text", name="answer", placeholder="Card Answer")
+				input(type="hidden", name="deck", value="#{deck}")
+				input(type="submit")

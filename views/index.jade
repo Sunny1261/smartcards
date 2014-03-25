@@ -1,0 +1,22 @@
+extends layout
+
+block content
+	h1.
+		Welcome to SmartCards, #{userlist.username}
+	
+	#decks
+		h2 Decks
+			table
+				thead
+					th Deck Name
+					th Delete?
+				each deck, i in decklist
+					tr
+						td: a(href="/viewdeck/#{deck.name}") #{deck.name}
+						td: a(href="/deletedeck/#{deck.name}") Delete
+			
+			#adddeck
+				form(name="newdeck", action="/adddeck", method="post")
+					input(type="text", name="deckname", placeholder="Deck Name")
+					input(type="submit")
+		

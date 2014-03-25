@@ -1,0 +1,15 @@
+extends layout
+
+block content
+	h1: Viewing Card from Deck 
+		a(href="/viewdeck/#{deck}") #{deck}
+	
+	#card
+		h2 Enter the answer for the following key. 
+		h3 #{card.key}
+			#checkanswer
+				form(name="answercard", action="/answercard", method="post")
+					input(type="text", name="answer", placeholder="Your Answer")
+					input(type="hidden", name="deck", value="#{deck}")
+					input(type="hidden", name="cardId", value="#{card._id}")
+					input(type="submit")

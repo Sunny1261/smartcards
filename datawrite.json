@@ -1,0 +1,9 @@
+db.decks.insert({owner: "
+
+db.users.insert({email: "sunnygupt@gmail.com", username: "Sunny1261"})
+
+db.decks.insert({owner: "Sunny1261", name : "50StateCapitols"})
+db.decks.insert({owner: "Sunny1261", name : "Computers"});
+
+db.cards.insert({user: "Sunny1261", deck : "50StateCapitols", key : "Atlanta", answer : "Georgia", queue: 1});
+db.cards.insert({user: "Sunny1261", deck : "50StateCapitols", key : "Tallahassee", answer : "Florida", queue: 1});
