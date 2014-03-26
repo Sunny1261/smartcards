@@ -6,6 +6,8 @@
 var express = require('express');
 var routes = require('./routes');
 var user = require('./routes/user');
+var deck = require('./routes/deck');
+var card = require('./routes/card');
 var http = require('http');
 var path = require('path');
 
@@ -31,19 +33,20 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
+// Basic Gets
 app.get('/', routes.index(db));
 app.get('/users', user.list);
-app.get('/viewdeck/:id', routes.deckview(db));
-app.get('/rundeck/:id', routes.rundeck(db));
+app.get('/viewdeck/:id', deck.deckview(db));
+app.get('/rundeck/:id', deck.rundeck(db));
 
 // Delete
-app.get('/deletedeck/:id', routes.deletedeck(db));
-app.get('/deletecard/:deckname/:id', routes.deletecard(db));
+app.get('/deletedeck/:id', deck.deletedeck(db));
+app.get('/deletecard/:deckname/:id', card.deletecard(db));
 
 // Post Forms
-app.post('/adddeck', routes.adddeck(db));
-app.post('/addcard', routes.addcard(db));
-app.post('/answercard', routes.answercard(db));
+app.post('/adddeck', deck.adddeck(db));
+app.post('/addcard', card.addcard(db));
+app.post('/answercard', card.answercard(db));
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
