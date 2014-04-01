@@ -10,13 +10,15 @@ block content
 				each deck, i in decklist
 					tr
 						td: a(href="/viewdeck/#{deck.name}") #{deck.name}
-						td: a(href="/deletedeck/#{deck.name}") Delete Deck
+						td: a(href="/viewdeck/#{deck.name}") #{counts[deck.name]} Cards
+						td
+							form(action="/deletedeck/#{deck.name}")
+									input.btn.btn-danger(type="submit" value="Delete Deck" id="deleteDeck")
 			
 			#adddeck
 				b: u Create New Deck
 				form(name="newdeck", action="/adddeck", method="post")
 					input.input-large( type="text", name="deckname", placeholder="Deck Name" style="margin-top:10px; margin-right: 10px;")
-					input.btn-primary.btn(type="submit")
+					input.btn-primary.btn(type="submit" value="Create")
 
 	div.footer
-		

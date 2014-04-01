@@ -9,7 +9,6 @@
  var users = 'users';
  var decks = 'decks';
  var cards = 'cards';	
- var name = '';
  // Testing variable. 
  
  var uname = 'Sunny1261';
@@ -28,8 +27,25 @@ exports.index = function (db) {
 					} else {
 						console.log(declist);
 						console.log(declist.length);
-						
-						res.render('index', {"userlist": users, "decklist": declist});
+
+						db.collection(cards).group(["deck"], {}, { "count" : 0 }, 
+							"function(curr, result){ result.count++; }",
+							function(err, results) {
+								if (err) {
+									console.log(err);
+								} else {
+									var rdyCnts = {};
+									console.log(results);
+
+									for(var i = 0; i < results.length; i++){
+										rdyCnts[results[i].deck] = results[i].count;
+									}
+									console.log(rdyCnts);
+
+									res.render('index', {"userlist": users, "decklist": declist, "counts": rdyCnts});
+								}
+							}
+						);
 					}
 				});
 			}
