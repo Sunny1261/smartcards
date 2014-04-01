@@ -1,8 +1,23 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: silver;
 }
 
 a {
   color: #00B7FF;
+}
+
+.top {
+	padding-bottom: 50px;
+	width: 100%;
+}
+
+tr td {
+  /*border-bottom:1pt solid black;*/
+  padding-right: 100px;
+}
+
+#adddeck {
+	padding-top: 20px;
 }

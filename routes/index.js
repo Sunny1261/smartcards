@@ -8,7 +8,8 @@
  
  var users = 'users';
  var decks = 'decks';
- var cards = 'cards';
+ var cards = 'cards';	
+ var name = '';
  // Testing variable. 
  
  var uname = 'Sunny1261';
@@ -27,6 +28,7 @@ exports.index = function (db) {
 					} else {
 						console.log(declist);
 						console.log(declist.length);
+						
 						res.render('index', {"userlist": users, "decklist": declist});
 					}
 				});

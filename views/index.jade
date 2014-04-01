@@ -1,22 +1,22 @@
 extends layout
 
 block content
-	h1.
-		Welcome to SmartCards, #{userlist.username}
+	div.top
+		h1 Welcome to SmartCards, #{userlist[0].username}!
 	
-	#decks
-		h2 Decks
+	div.container
+		h2: u Your Card Decks
 			table
-				thead
-					th Deck Name
-					th Delete?
 				each deck, i in decklist
 					tr
 						td: a(href="/viewdeck/#{deck.name}") #{deck.name}
-						td: a(href="/deletedeck/#{deck.name}") Delete
+						td: a(href="/deletedeck/#{deck.name}") Delete Deck
 			
 			#adddeck
+				b: u Create New Deck
 				form(name="newdeck", action="/adddeck", method="post")
-					input(type="text", name="deckname", placeholder="Deck Name")
-					input(type="submit")
+					input.input-large( type="text", name="deckname", placeholder="Deck Name" style="margin-top:10px; margin-right: 10px;")
+					input.btn-primary.btn(type="submit")
+
+	div.footer
 		
