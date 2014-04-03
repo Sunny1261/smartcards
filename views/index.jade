@@ -1,23 +1,49 @@
 extends layout
 
 block content
-	div.container
-		h1 Welcome to SmartCards, #{userlist[0].username}!
+	div.top
+		div.navbar
+			div.navbar-inner
+				div.container#header
+					a.brand(href="#") SmartCards
+					ul.nav.pull-left
+						li.active: a(href="/") My Decks
+						//-li: a(href="/") Link 1
+
+					ul.nav.pull-right
+						li.dropdown
+							a.dropdown-toggle(href="#" role="button" data-toggle="dropdown" id="user_button") #{userlist[0].username}
+							ul.dropdown-menu(role="menu" aria-labelledvy="user_button")
+								li: a(href="#" tabindex="-1" id="button1") Preferences Page
+								//-li: a(tabindex="-1" data-toggle="modal" data-target="#modalName") Preferences Modal
+								li: a#logout(tabindex="-1" href="#") Logout
+
+	div.content
+		//-h1 Welcome to SmartCards, #{userlist[0].username}!
 
 		h2: u Your Card Decks
-			table
+			div.userDecks
 				each deck, i in decklist
-					tr
-						td: a(href="/viewdeck/#{deck.name}") #{deck.name}
-						td: a(href="/viewdeck/#{deck.name}") #{counts[deck.name]} Cards
-						td.deleteDeck
-							form(action="/deletedeck/#{deck.name}" style="margin-bottom: 0px;")
-									input.btn.btn-danger(type="submit" value="Delete Deck")
-			
-			#adddeck
-				b: u Create New Deck
-				form(name="newdeck", action="/adddeck", method="post")
-					input.input-large( type="text", name="deckname", placeholder="Deck Name" style="margin-top:10px; margin-right: 10px;")
-					input.btn-primary.btn(type="submit" value="Create")
+					div.deckShape
+						div.deckName
+							h2 #{deck.name}
+						div.cardCount
+							h3 #{counts[deck.name]} Cards
+						div
+							a(href="/viewdeck/#{deck.name}"): input.btn-primary.btn.viewDeckBtn(value="View Deck")
+							a(href"#"): input.btn-primary.btn.viewDeckBtn(value="Rename Deck")
+							a(href="/deletedeck/#{deck.name}"): input.btn-primary.btn.viewDeckBtn(value="Delete Deck")
+				
+				div.newDeck(name="newDeckForm" style="display: none;")
+					b: u Create New Deck
+					form(name="newdeck", action="/adddeck", method="post")
+						input.input-large( type="text", name="deckname", placeholder="Deck Name" style="margin-top:10px; margin-right: 10px;")
+						input.btn-primary.btn(type="submit" value="Create")
+
+				div.newDeck(name="newDeckButton")
+					div
+						img(src="img/plus-button.png")
+					div(style="font-size:20px;").
+						Create New Deck
 
 	div.footer

@@ -13,17 +13,17 @@ a {
 	top: 0;
 	left: 0;
 	right: 0;
-	padding: 25px;
-	height: 150px;
+	height: 40px;
 	background-color: green;
 	width: 100%;
+	z-index: 10000;
 }
 
-.container {
+.content {
 	background-color: yellow;
 	width: 100%;
 	position: fixed;
-	top: 190px;
+	top: 40px;
 	bottom: 30px;
 	left: 0;
 	right: 0;
@@ -51,6 +51,47 @@ tr.columns td {
 
 #adddeck, #addcard {
 	padding-top: 25px;
+}
+
+.deckShape {
+	height: 280px;
+	width: 200px;
+	text-align: center;
+	background-color: green;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+	display: inline-block;
+	margin-right: 20px;
+	margin-top: 10px;
+}
+
+.newDeck {
+	height: 280px;
+	width: 200px;
+	text-align: center;
+	background-color: green;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+	display: inline-block;
+	margin-right: 20px;
+	vertical-align: top;
+	margin-top: 10px;
+}
+
+.deckName {
+	padding-top: 10px;
+	height: 120px;
+	text-align: center;	
+	vertical-align: middle;
+	display: table-cell;
+	width: 190px;
+	padding-left: 5px;
+}
+
+.viewDeckBtn{
+	width: 160px;
+	padding: 5px;
+	margin-top: 5px;
 }
 
 #backToDeckList{
