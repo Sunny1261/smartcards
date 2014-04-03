@@ -14,7 +14,7 @@ a {
 	left: 0;
 	right: 0;
 	padding: 25px;
-	height: 50px;
+	height: 150px;
 	background-color: green;
 	width: 100%;
 }
@@ -23,7 +23,7 @@ a {
 	background-color: yellow;
 	width: 100%;
 	position: fixed;
-	top: 90px;
+	top: 190px;
 	bottom: 30px;
 	left: 0;
 	right: 0;
@@ -55,9 +55,6 @@ tr.columns td {
 
 #backToDeckList{
 	padding-bottom: 20px;
-}
-
-#deleteDeck {
 }
 
 tr.runBtn td{

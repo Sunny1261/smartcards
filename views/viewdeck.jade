@@ -14,16 +14,16 @@ block content
 					tr.columns
 						td Question / Key
 						td Correct Answer
-						td Queue Number
-						td 
+						td Queue #
+						td.noborder
 					each card, i in cardlist
 						tr
 							td #{card.key}
 							td #{card.answer}
 							td #{card.queue}
 							td
-								form(action="/deletecard/#{deck}/#{card._id}")
-									input.btn.btn-danger(type="submit" value="Delete")
+								form(action="/deletecard/#{deck}/#{card._id}" style="margin-bottom: 0px;")
+									input.btn.btn-danger(type="submit" value="Delete Card")
 					tr.runBtn
 						td: a(href="/rundeck/#{deck}") Run Deck >>
 				#addcard

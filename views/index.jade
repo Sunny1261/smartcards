@@ -1,19 +1,18 @@
 extends layout
 
 block content
-	div.top
-		h1 Welcome to SmartCards, #{userlist[0].username}!
-	
 	div.container
+		h1 Welcome to SmartCards, #{userlist[0].username}!
+
 		h2: u Your Card Decks
 			table
 				each deck, i in decklist
 					tr
 						td: a(href="/viewdeck/#{deck.name}") #{deck.name}
 						td: a(href="/viewdeck/#{deck.name}") #{counts[deck.name]} Cards
-						td
-							form(action="/deletedeck/#{deck.name}")
-									input.btn.btn-danger(type="submit" value="Delete Deck" id="deleteDeck")
+						td.deleteDeck
+							form(action="/deletedeck/#{deck.name}" style="margin-bottom: 0px;")
+									input.btn.btn-danger(type="submit" value="Delete Deck")
 			
 			#adddeck
 				b: u Create New Deck
