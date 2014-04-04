@@ -25,6 +25,7 @@ app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
+app.use(express.bodyParser());
 app.use(express.cookieParser());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
@@ -35,7 +36,7 @@ if ('development' == app.get('env')) {
 }
 
 // Basic Gets
-app.get('/', user.loginCheck(db));
+app.get('/', user.loggedInCheck(db));
 app.get('/logout', user.logout(db));
 app.get('/home', routes.index(db));
 app.get('/users', user.list);

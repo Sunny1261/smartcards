@@ -14,7 +14,7 @@ html
 				div#login_box.hero-unit
 					img(src="/img/logo-big.jpg" alt="logo" style="padding-bottom: 20px;")
 					form#login_form(action="/loginuser" method="post")
-						p#login_status
+						p#login_status #{errorMsg}
 						input#username_input(type="text" name="username" placeholder="Username")
 						input#user_email(type="email" name="email" placeholder="Email ")
 						input#password(type="password" name="password" placeholder="Password")

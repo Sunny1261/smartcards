@@ -21,6 +21,7 @@ exports.index = function (db) {
 			res.redirect("/");
 		} else {
 			var uname = req.cookies.user.username;
+			console.log(req.cookies);
 			db.collection(users).find({username: uname}).toArray(function (err, users){
 				if (err){
 					console.log(err);
@@ -47,10 +48,9 @@ exports.index = function (db) {
 										}
 										console.log(rdyCnts);
 
-										res.cookie('user', users);
 										res.cookie('userDecks', declist);
 										res.cookie('count', rdyCnts);
-										res.render('index', {"user": users, "decklist": declist, "counts": rdyCnts});
+										res.render('index', {"user": req.cookies.user, "decklist": declist, "counts": rdyCnts});
 									}
 								}
 							);
