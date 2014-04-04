@@ -1,0 +1,24 @@
+doctype html
+html
+	head
+		title= title
+		link(rel='stylesheet', href='/lib/bootstrap/css/bootstrap.min.css')
+		link(rel='stylesheet', href='/lib/bootstrap/css/bootstrap-responsive.min.css')
+		link(rel='stylesheet', href='/stylesheets/style.css')
+		script(src='http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js')
+		script(src='/lib/bootstrap/js/bootstrap.min.js')
+		script(src='/javascripts/loginLogic.js')
+	body(style="background-image: url('/img/pattern.png');")
+		block content
+			div.container
+				div#login_box.hero-unit
+					img(src="/img/logo-big.jpg" alt="logo" style="padding-bottom: 20px;")
+					form#login_form(action="/loginuser" method="post")
+						p#login_status
+						input#username_input(type="text" name="username" placeholder="Username")
+						input#user_email(type="email" name="email" placeholder="Email ")
+						input#password(type="password" name="password" placeholder="Password")
+						input#password2(type="password" name="verify_password" placeholder="VerifyPassword")
+						input.btn.btn-primary.pull-left#loginButton(type="submit" value="Login")
+					a.pull-right#register New User?
+					a#cancel.pull-right Already have an account?

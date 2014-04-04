@@ -25,6 +25,7 @@ app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
+app.use(express.cookieParser());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -34,7 +35,9 @@ if ('development' == app.get('env')) {
 }
 
 // Basic Gets
-app.get('/', routes.index(db));
+app.get('/', user.loginCheck(db));
+app.get('/logout', user.logout(db));
+app.get('/home', routes.index(db));
 app.get('/users', user.list);
 app.get('/viewdeck/:id', deck.deckview(db));
 app.get('/rundeck/:id', deck.rundeck(db));
@@ -47,6 +50,9 @@ app.get('/deletecard/:deckname/:id', card.deletecard(db));
 app.post('/adddeck', deck.adddeck(db));
 app.post('/addcard', card.addcard(db));
 app.post('/answercard', card.answercard(db));
+app.post('/adduser', user.adduser(db));
+app.post('/loginuser', user.login(db));
+
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

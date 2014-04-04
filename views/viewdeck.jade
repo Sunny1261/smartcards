@@ -2,11 +2,25 @@ extends layout
 
 block content
 	div.top
-		h1 Viewing Deck #{deck}
+		div.navbar
+			div.navbar-inner
+				div.container#header
+					a.brand(href="/home") SmartCards
+					ul.nav.pull-left
+						li: a(href="/home") My Decks
+
+					ul.nav.pull-right
+						li.dropdown
+							a.dropdown-toggle(href="#" role="button" data-toggle="dropdown" id="user_button") #{user[0].username}
+							ul.dropdown-menu(role="menu" aria-labelledvy="user_button")
+								li: a(href="#" tabindex="-1" id="button1") Preferences Page
+								li: a#logout(tabindex="-1" href="/logout") Logout
 	
 	div.content
+		h1 Viewing Deck #{deck}
+
 		#backToDeckList
-			h3: a(href="/") << Return To List
+			h3: a(href="/home") << Return To List
 		#cards
 			h2 Cards
 			h3 

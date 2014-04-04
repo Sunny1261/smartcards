@@ -5,21 +5,21 @@ block content
 		div.navbar
 			div.navbar-inner
 				div.container#header
-					a.brand(href="#") SmartCards
+					a.brand(href="/") SmartCards
 					ul.nav.pull-left
-						li.active: a(href="/") My Decks
-						//-li: a(href="/") Link 1
+						li.active: a(href="/home") My Decks
+						//-li: a(href="/home") Link 1
 
 					ul.nav.pull-right
 						li.dropdown
-							a.dropdown-toggle(href="#" role="button" data-toggle="dropdown" id="user_button") #{userlist[0].username}
+							a.dropdown-toggle(href="#" role="button" data-toggle="dropdown" id="user_button") #{user[0].username}
 							ul.dropdown-menu(role="menu" aria-labelledvy="user_button")
 								li: a(href="#" tabindex="-1" id="button1") Preferences Page
 								//-li: a(tabindex="-1" data-toggle="modal" data-target="#modalName") Preferences Modal
-								li: a#logout(tabindex="-1" href="#") Logout
+								li: a#logout(tabindex="-1" href="/logout") Logout
 
 	div.content
-		//-h1 Welcome to SmartCards, #{userlist[0].username}!
+		//-h1 Welcome to SmartCards, #{user[0].username}!
 
 		h2: u Your Card Decks
 			div.userDecks
