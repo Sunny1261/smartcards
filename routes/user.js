@@ -54,7 +54,6 @@ exports.login = function(db){
 				}
 			}
 		});
-		//log user in
 	}
 }
 
@@ -65,41 +64,47 @@ exports.adduser = function (db) {
 		var password = req.body.password;
 		var verify_password = req.body.verify_password;
 
-		db.collection(users).find({email: email}).toArray(function (err, emailMatches){
-			if(err){
-				console.log(err);
-			} else if(emailMatches.length > 0){
-				res.location("login");
-				res.render('login', {errorMsg: "Email "+email+" already registered"});
-			} else {
+		if(strcmp(username, '') == 0 || strcmp(email, '') == 0 || strcmp(password, '') == 0){
+			res.location("login");
+			res.render('login', {errorMsg: "Register Error: All fields are required."});
+		} else {
 
-				db.collection(users).find({username: username}).toArray(function(err, usernameMatches){
-					if(err){
-						console.log(err);
-					} else if(usernameMatches.length > 0){
-						res.location("login");
-						res.render('login', {errorMsg: "Username "+username+" taken. Choose a different username"});
-					} else {
-						if(strcmp(password, verify_password) != 0){
+			db.collection(users).find({email: email}).toArray(function (err, emailMatches){
+				if(err){
+					console.log(err);
+				} else if(emailMatches.length > 0){
+					res.location("login");
+					res.render('login', {errorMsg: "Register Error: Email "+email+" already registered"});
+				} else {
+
+					db.collection(users).find({username: username}).toArray(function(err, usernameMatches){
+						if(err){
+							console.log(err);
+						} else if(usernameMatches.length > 0){
 							res.location("login");
-							res.render('login', {errorMsg: "Passwords don't match"});
+							res.render('login', {errorMsg: "Username "+username+" taken. Choose a different username"});
 						} else {
-							db.collection(users).insert({username: username, email: email, password: password}, function(err, doc){
-								if (err){
-									console.log(err);
-								} else {
-									doc[0].password = null;
-									console.log(doc[0]);
-									res.cookie('user', doc[0]);
-									res.location("index");
-									res.redirect("/home");
-								}
-							});
+							if(strcmp(password, verify_password) != 0){
+								res.location("login");
+								res.render('login', {errorMsg: "Passwords don't match"});
+							} else {
+								db.collection(users).insert({username: username, email: email, password: password}, function(err, doc){
+									if (err){
+										console.log(err);
+									} else {
+										doc[0].password = null;
+										console.log(doc[0]);
+										res.cookie('user', doc[0]);
+										res.location("index");
+										res.redirect("/home");
+									}
+								});
+							}
 						}
-					}
-				});
-			}
-		});
+					});
+				}
+			});
+		}
 	}
 };
 

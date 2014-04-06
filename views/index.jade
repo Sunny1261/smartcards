@@ -34,11 +34,12 @@ block content
 							a(href"#"): input.btn-primary.btn.viewDeckBtn(value="Rename Deck")
 							a(href="/deletedeck/#{deck.name}"): input.btn-primary.btn.viewDeckBtn(value="Delete Deck")
 				
-				div.newDeck(name="newDeckForm" style="display: none;")
-					b: u Create New Deck
+				div.newDeck(name="newDeckForm")
+					b(style="padding-top: 40px;"): u Create Deck
 					form(name="newdeck", action="/adddeck", method="post")
-						input.input-large( type="text", name="deckname", placeholder="Deck Name" style="margin-top:10px; margin-right: 10px;")
-						input.btn-primary.btn(type="submit" value="Create")
+						input(type="text", name="deckname", placeholder="Deck Name" style="width: 170px;")
+						input.btn-primary.btn(type="submit" value="Create" style="width: 172px; padding: 5px; margin-top: 5px;")
+						input.btn-primary.btn.viewDeckBtn(value="Cancel")
 
 				div.newDeck(name="newDeckButton")
 					div
