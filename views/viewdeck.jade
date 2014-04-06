@@ -17,35 +17,56 @@ block content
 								li: a#logout(tabindex="-1" href="/logout") Logout
 	
 	div.content
-		h1 Viewing Deck #{deck}
+		h1 Deck: #{deck}
+			a(href="/rundeck/#{deck}"): input.btn-primary.btn.viewDeckBtn(value="Run Deck >>" style="margin-left: 40px; margin-bottom: 10px;")
 
-		#backToDeckList
-			h3: a(href="/home") << Return To List
 		#cards
-			h2 Cards
-			h3 
-				table
-					tr.columns
-						td Question / Key
-						td Correct Answer
-						td Queue #
-						td.noborder
-					each card, i in cardlist
-						tr
-							td #{card.key}
-							td #{card.answer}
-							td #{card.queue}
-							td
-								form(action="/deletecard/#{deck}/#{card._id}" style="margin-bottom: 0px;")
-									input.btn.btn-danger(type="submit" value="Delete Card")
-					tr.runBtn
-						td: a(href="/rundeck/#{deck}") Run Deck >>
-				#addcard
-					b: u Create New Card
-					form(name="newcard", action="/addcard", method="post")
-						input.input-large(type="text", name="key", placeholder="Card Key" style="margin-top:8px; margin-right: 10px;")
-						input.input-large(type="text", name="answer", placeholder="Card Answer" style="margin-top:8px; margin-right: 10px;")
-						input(type="hidden", name="deck", value="#{deck}")
-						input.btn-primary.btn(type="submit" value="Create")
+			div.deckCards
+				each card, i in cardlist
+					div.deckShape(id="card-#{card._id}")
+						div.cardKey
+							h2 #{card.key}
+						div.cardAnswer(style="height: 30px;")
+							h3(id="#{card._id}" style="display: none;") Answer: #{card.answer}
+						div.queue
+							// make this right/wrong ratio soon
+							h4 Queue: #{card.queue}
+						div.buttons
+							input.btn-primary.btn.viewDeckBtn#cardAnswerButton(value="View Answer" name="#{card._id}" onclick="revealAnswer('#{card._id}')")
+							input.btn-primary.btn.viewDeckBtn#editCardButton(value="Edit Card" name="#{card._id}" onclick="editCard('#{card._id}')")
+							a(href="/deletecard/#{deck}/#{card._id}"): input.btn-primary.btn.viewDeckBtn(value="Delete Card")
+
+					div.deckShape(id="editCard-#{card._id}" style="display: none;")
+						div(style="padding-top: 17px; padding-bottom: 22px;")
+							h2 Edit Card
+						form(id="editcardform-#{card._id}", action="/editcard", method="post")
+							b(style="margin-left: -80px;") Question / Key
+							input.editCardInput(type="text" name="key" value="#{card.key}" id="editKey-#{card._id}")
+							br
+							b(style="margin-left: -80px;") Correct Answer
+							input.editCardInput(type="text" name="answer" value="#{card.answer}" id="editAnswer-#{card._id}")
+							input(type="hidden" name="deck" value="#{deck}")
+							input(type="hidden" name="cardId" value="#{card._id}")
+							input.btn-primary.btn.viewDeckBtn(id="editCardSubmit-#{card._id}" value="Save Changes" onclick="saveCardChanges('#{card._id}')")
+							input.btn-primary.btn.viewDeckBtn(id="editCardCancel-#{card._id}" value="Cancel" onclick="hideEditForm('#{card._id}')")
+
+				div.deckShape(id="createCard" style="display: none;")
+						div(style="padding-top: 17px; padding-bottom: 22px;")
+							h2 Create New Card
+						form(id="createcardform", action="/addcard", method="post")
+							b(style="margin-left: -80px;") Question / Key
+							input.editCardInput(type="text" name="key" placeholder="Card Key" id="newCardKey")
+							br
+							b(style="margin-left: -80px;") Correct Answer
+							input.editCardInput(type="text" name="answer" placeholder="Card Answer" id="newCardAnswer")
+							input(type="hidden" name="deck" value="#{deck}")
+							input.btn-primary.btn.viewDeckBtn(id="createCardSubmit" value="Create" onclick="saveNewCard()")
+							input.btn-primary.btn.viewDeckBtn(id="createCardCancel" value="Cancel" onclick="hideCreateForm()")
+
+				div.newDeck#newCardButton(name="newCardButton")
+					div
+						img(src="/img/plus-button.png")
+					div
+						input.btn-primary.btn.viewDeckBtn#createNewCard(value="Add New Card" onclick="showCreateForm()")
 
 	div.footer

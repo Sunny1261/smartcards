@@ -50,6 +50,7 @@ app.get('/deletecard/:deckname/:id', card.deletecard(db));
 // Post Forms
 app.post('/adddeck', deck.adddeck(db));
 app.post('/addcard', card.addcard(db));
+app.post('/editcard', card.editcard(db));
 app.post('/answercard', card.answercard(db));
 app.post('/adduser', user.adduser(db));
 app.post('/loginuser', user.login(db));

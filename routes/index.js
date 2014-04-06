@@ -21,18 +21,16 @@ exports.index = function (db) {
 			res.redirect("/");
 		} else {
 			var uname = req.cookies.user.username;
-			console.log(req.cookies);
 			db.collection(users).find({username: uname}).toArray(function (err, users){
 				if (err){
 					console.log(err);
 				} else {
-					console.log(users);
 					db.collection(decks).find({owner: uname}).toArray(function (err, declist){
 						if (err) {
 							console.log(err);
 						} else {
-							console.log(declist);
-							console.log(declist.length);
+							//console.log(declist);
+							//console.log(declist.length);
 
 							db.collection(cards).group(["deck"], {}, { "count" : 0 }, 
 								"function(curr, result){ result.count++; }",
@@ -41,12 +39,12 @@ exports.index = function (db) {
 										console.log(err);
 									} else {
 										var rdyCnts = {};
-										console.log(results);
+										//console.log(results);
 
 										for(var i = 0; i < results.length; i++){
 											rdyCnts[results[i].deck] = results[i].count;
 										}
-										console.log(rdyCnts);
+										//console.log(rdyCnts);
 
 										res.cookie('userDecks', declist);
 										res.cookie('count', rdyCnts);

@@ -9,15 +9,11 @@
  var users = 'users';
  var decks = 'decks';
  var cards = 'cards'; 
- 
- // Default Username. 
- var uname = 'Sunny1261';
 
 // View the entire contents of a deck. 
 exports.deckview = function (db)  {
 	return function (req, res){
 		var deckToShow = req.params.id;
-		//console.log(req.cookies);
 		
 		if(req.cookies.user == undefined){
 			res.clearCookie('userDecks');
@@ -25,7 +21,7 @@ exports.deckview = function (db)  {
 			res.location("login");
 			res.redirect("/");
 		} else {
-
+			var uname = req.cookies.user.username;
 			// Query to retrieve all the cards in a deck.
 			db.collection(cards).find({user: uname, deck: deckToShow}).toArray(function (err, cardlist){
 				if (err) {
@@ -43,6 +39,7 @@ exports.adddeck = function (db) {
 	return function (req, res) {
 
 		var deckname = req.body.deckname;
+		var uname = req.cookies.user.username;
 		
 		if (deckname) {
 			// Query to insert a new deck.
@@ -58,10 +55,30 @@ exports.adddeck = function (db) {
 	}
 };
 
+exports.editdeck = function (db) {
+	return function (req, res) {
+
+		var deckname = req.body.name;
+		var o_id = new ObjectID(req.body.id);
+		
+		db.collection(decks).update({"_id": o_id}, 
+			{$set:{"name": deckname}},
+			function(err, doc){
+			if (err){
+				console.log(err);
+			} else {
+				res.location("index");
+				res.redirect("/home");
+			}
+		});
+	}
+};
+
 exports.deletedeck = function (db) {
 	return function (req, res) {
 		var delDeck = req.params.id;
-		
+		var uname = req.cookies.user.username;
+
 		// Query to delete a deck. 
 		db.collection(decks).remove({name: delDeck, owner: uname}, function(err, result) {
 			res.location("index");
@@ -73,6 +90,7 @@ exports.deletedeck = function (db) {
 exports.rundeck = function(db) {
 	return function (req, res){
 		var deckName = req.params.id;
+		var uname = req.cookies.user.username;
 
 		if(req.cookies.user == undefined){
 			res.clearCookie('userDecks');

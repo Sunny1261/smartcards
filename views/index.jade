@@ -15,36 +15,45 @@ block content
 							a.dropdown-toggle(href="#" role="button" data-toggle="dropdown" id="user_button") #{user.username}
 							ul.dropdown-menu(role="menu" aria-labelledvy="user_button")
 								li: a(href="#" tabindex="-1" id="button1") Preferences Page
-								//-li: a(tabindex="-1" data-toggle="modal" data-target="#modalName") Preferences Modal
 								li: a#logout(tabindex="-1" href="/logout") Logout
 
 	div.content
-		//-h1 Welcome to SmartCards, #{user.username}!
 
 		h2: u Your Card Decks
 			div.userDecks
 				each deck, i in decklist
-					div.deckShape
+					div.deckShape(id="deck-#{deck._id}")
 						div.deckName
 							h2 #{deck.name}
 						div.cardCount
 							h3 #{counts[deck.name]} Cards
 						div
 							a(href="/viewdeck/#{deck.name}"): input.btn-primary.btn.viewDeckBtn(value="View Deck")
-							a(href"#"): input.btn-primary.btn.viewDeckBtn(value="Rename Deck")
+							input.btn-primary.btn.viewDeckBtn(value="Rename Deck" onclick="showRenameDeckForm('#{deck._id}')")
 							a(href="/deletedeck/#{deck.name}"): input.btn-primary.btn.viewDeckBtn(value="Delete Deck")
-				
-				div.newDeck(name="newDeckForm")
-					b(style="padding-top: 40px;"): u Create Deck
-					form(name="newdeck", action="/adddeck", method="post")
-						input(type="text", name="deckname", placeholder="Deck Name" style="width: 170px;")
-						input.btn-primary.btn(type="submit" value="Create" style="width: 172px; padding: 5px; margin-top: 5px;")
-						input.btn-primary.btn.viewDeckBtn(value="Cancel")
 
-				div.newDeck(name="newDeckButton")
+					div.deckShape(id="editDeck-#{deck._id}" style="display: none;")
+						div(style="padding-top: 17px; padding-bottom: 22px;")
+							h2 Edit Card
+						form(id="editdeckform-#{deck._id}", action="/editdeck", method="post")
+							b(style="margin-left: -80px;") Deck Name
+							input.editCardInput(type="text" name="name" value="#{deck.name}" id="editDeckName-#{deck._id}")
+							input(type="hidden" name="id" value="#{deck._id}")
+							input.btn-primary.btn.viewDeckBtn(value="Save Changes" onclick="renameDeck('#{deck._id}')")
+							input.btn-primary.btn.viewDeckBtn(value="Cancel" onclick="hideRenameDeckForm('#{deck._id}')")
+				
+				div.newDeck#deckForm(name="newDeckForm" style="display: none;")
+					div(style="padding-top: 40px;") 
+						h2 Create Deck
+					form(id="newdeck" action="/adddeck", method="post")
+						input#newDeckName(type="text" name="deckname" placeholder="Deck Name" style="width: 170px; margin-top: 20px;")
+						input.btn-primary.btn.viewDeckBtn#createDeck(value="Create" style="margin-top: 31px;" onclick="createNewDeck()")
+						input.btn-primary.btn.viewDeckBtn#cancelCreateDeck(value="Cancel" onclick="hideCreateDeckForm()")
+
+				div.newDeck#newDeckButton(name="newDeckButton")
 					div
-						img(src="img/plus-button.png")
-					div(style="font-size:20px;").
-						Create New Deck
+						img(src="/img/plus-button.png")
+					div
+						input.btn-primary.btn.viewDeckBtn#createNewDeck(value="Create New Deck" onclick="showCreateDeckForm()")
 
 	div.footer
