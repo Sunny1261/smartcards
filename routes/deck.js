@@ -79,10 +79,21 @@ exports.deletedeck = function (db) {
 		var delDeck = req.params.id;
 		var uname = req.cookies.user.username;
 
-		// Query to delete a deck. 
-		db.collection(decks).remove({name: delDeck, owner: uname}, function(err, result) {
-			res.location("index");
-			res.redirect("/home");
+		// Delete cards in this deck
+		db.collection(cards).remove({user: uname, deck: delDeck}, function(cardErr, cardResult){
+			if (cardErr){
+				console.log(cardErr);
+			} else {
+				// Query to delete a deck. 
+				db.collection(decks).remove({name: delDeck, owner: uname}, function(deckErr, deckResult) {
+					if (deckErr){
+						console.log(deckErr);
+					} else {
+						res.location("index");
+						res.redirect("/home");
+					}
+				});
+			}
 		});
 	}
 };

@@ -10,6 +10,13 @@
  var decks = 'decks';
  var cards = 'cards'; 
 
+// string compare function
+function strcmp(s1, s2){  
+    if (s1.toString() < s2.toString()) return -1;  
+    if (s1.toString() > s2.toString()) return 1;  
+    return 0;  
+}
+
 // Deleting a card. 
 exports.deletecard = function (db) {
 	return function (req, res) {

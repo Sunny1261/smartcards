@@ -61,26 +61,13 @@ function saveNewCard(){
 	}
 }
 
-function showCreateForm(){
-	$("#newCardButton").hide();
-	$("#createCard").show();
+function clearCreateForm(){
+	document.getElementById('newCardKey').value = '';
+	document.getElementById('newCardAnswer').value = '';
 }
 
-function hideCreateForm(){
-	$("#newCardButton").show();
-	$("#createCard").hide();
-}
-
-function showCreateDeckForm(){
+function clearCreateDeckForm(){
 	document.getElementById('newDeckName').value='';
-	$('#deckForm').show();
-	$('#newDeckButton').hide();
-}
-
-function hideCreateDeckForm(){
-	document.getElementById('newDeckName').value='';
-	$('#deckForm').hide();
-	$('#newDeckButton').show();
 }
 
 function createNewDeck(){
@@ -90,4 +77,20 @@ function createNewDeck(){
 	} else {
 		document.getElementById('newdeck').submit();
 	}
+}
+
+function checkAndRevealAnswer(){
+	var user_ans = document.getElementById('userAnswer').value;
+	var correct_ans = document.getElementById('correctAnswer').value;
+	if(strcmp(user_ans, correct_ans) == 0){
+		$(".result").html('<h2> CORRECT! :)</h2>');
+	} else {
+		$(".result").html('<h2> INCORRECT! :(</h2>');
+	}
+	$('.currentCardSubmit').attr({'disabled': 'disabled'});
+	$(".revealAnswer").show();
+}
+
+function submitCardAnswer(){
+	document.getElementById('answercard').submit();
 }

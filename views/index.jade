@@ -42,18 +42,12 @@ block content
 							input.btn-primary.btn.viewDeckBtn(value="Save Changes" onclick="renameDeck('#{deck._id}')")
 							input.btn-primary.btn.viewDeckBtn(value="Cancel" onclick="hideRenameDeckForm('#{deck._id}')")
 				
-				div.newDeck#deckForm(name="newDeckForm" style="display: none;")
+				div.newDeck#deckForm(name="newDeckForm")
 					div(style="padding-top: 40px;") 
 						h2 Create Deck
 					form(id="newdeck" action="/adddeck", method="post")
 						input#newDeckName(type="text" name="deckname" placeholder="Deck Name" style="width: 170px; margin-top: 20px;")
 						input.btn-primary.btn.viewDeckBtn#createDeck(value="Create" style="margin-top: 31px;" onclick="createNewDeck()")
-						input.btn-primary.btn.viewDeckBtn#cancelCreateDeck(value="Cancel" onclick="hideCreateDeckForm()")
-
-				div.newDeck#newDeckButton(name="newDeckButton")
-					div
-						img(src="/img/plus-button.png")
-					div
-						input.btn-primary.btn.viewDeckBtn#createNewDeck(value="Create New Deck" onclick="showCreateDeckForm()")
+						input.btn-primary.btn.viewDeckBtn#cancelCreateDeck(value="Clear" onclick="clearCreateDeckForm()")
 
 	div.footer

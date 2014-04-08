@@ -117,7 +117,7 @@ tr.columns td {
 	height: 280px;
 	width: 200px;
 	text-align: center;
-	background-color: green;
+	background-color: white;
 	-moz-border-radius: 15px;
 	border-radius: 15px;
 	display: inline-block;
@@ -129,7 +129,7 @@ tr.columns td {
 	height: 280px;
 	width: 200px;
 	text-align: center;
-	background-color: green;
+	background-color: white;
 	-moz-border-radius: 15px;
 	border-radius: 15px;
 	display: inline-block;
@@ -176,7 +176,22 @@ tr.columns td {
 	margin: 0 auto;
 	-moz-border-radius: 15px;
 	border-radius: 15px;
-	background-color: green;
+	background-color: white;
+}
+
+.revealAnswer {
+	width: 600px;
+	margin: 0 auto;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+	background-color: white;
+	margin-top: 20px;
+	padding-top: 10px;
+}
+
+.nextQuestion {
+	width: 100%;
+	text-align: center;
 }
 
 .cardInstructions {
@@ -192,8 +207,13 @@ tr.columns td {
 	margin-top: 30px;
 }
 
-.currentCardSubmit {
-	
+.result {
+	width: 100%;
+	text-align: center;
+}
+
+.answerText {
+	margin-left: 20px;
 }
 
 #backToDeckList{

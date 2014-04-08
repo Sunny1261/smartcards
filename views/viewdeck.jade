@@ -50,7 +50,7 @@ block content
 							input.btn-primary.btn.viewDeckBtn(id="editCardSubmit-#{card._id}" value="Save Changes" onclick="saveCardChanges('#{card._id}')")
 							input.btn-primary.btn.viewDeckBtn(id="editCardCancel-#{card._id}" value="Cancel" onclick="hideEditForm('#{card._id}')")
 
-				div.deckShape(id="createCard" style="display: none;")
+				div.deckShape(id="createCard")
 						div(style="padding-top: 17px; padding-bottom: 22px;")
 							h2 Create New Card
 						form(id="createcardform", action="/addcard", method="post")
@@ -61,12 +61,6 @@ block content
 							input.editCardInput(type="text" name="answer" placeholder="Card Answer" id="newCardAnswer")
 							input(type="hidden" name="deck" value="#{deck}")
 							input.btn-primary.btn.viewDeckBtn(id="createCardSubmit" value="Create" onclick="saveNewCard()")
-							input.btn-primary.btn.viewDeckBtn(id="createCardCancel" value="Cancel" onclick="hideCreateForm()")
-
-				div.newDeck#newCardButton(name="newCardButton")
-					div
-						img(src="/img/plus-button.png")
-					div
-						input.btn-primary.btn.viewDeckBtn#createNewCard(value="Add New Card" onclick="showCreateForm()")
+							input.btn-primary.btn.viewDeckBtn(id="createCardCancel" value="Clear" onclick="clearCreateForm()")
 
 	div.footer
