@@ -28,7 +28,7 @@ block content
 			div.currentCardAnswer
 				#checkanswer
 					form(name="answercard" action="/answercard" method="post")
-						input(type="text" name="answer" placeholder="Your Answer" style="width: 460px;")
+						input(type="text" autocomplete="off" name="answer" placeholder="Your Answer" style="width: 460px;")
 						input(type="hidden" name="deck" value="#{deck}")
 						input(type="hidden" name="cardId" value="#{card._id}")
 						input.btn-primary.btn.viewDeckBtn.currentCardSubmit(type="submit" value="Submit" style="width: 470px; margin-top: 20px;")

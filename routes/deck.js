@@ -43,7 +43,7 @@ exports.adddeck = function (db) {
 		
 		if (deckname) {
 			// Query to insert a new deck.
-			db.collection(decks).insert({"owner": uname, "name": deckname}, function(err, doc){
+			db.collection(decks).insert({"owner": uname, "name": deckname, "run": 1}, function(err, doc){
 				if (err){
 					console.log(err);
 				} else {
