@@ -54,6 +54,7 @@ app.post('/editcard', card.editcard(db));
 app.post('/answercard', card.answercard(db));
 app.post('/adduser', user.adduser(db));
 app.post('/loginuser', user.login(db));
+app.post('/updatePreferences', user.updatePreferences(db));
 
 
 http.createServer(app).listen(app.get('port'), function(){

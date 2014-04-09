@@ -97,6 +97,10 @@ a {
     float:left;
 }
 
+#username, #useremail {
+	margin-left: 20px;
+}
+
 .btn {
 	font-size: 18px;
 }

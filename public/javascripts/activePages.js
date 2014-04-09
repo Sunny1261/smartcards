@@ -94,3 +94,19 @@ function checkAndRevealAnswer(){
 function submitCardAnswer(){
 	document.getElementById('answercard').submit();
 }
+
+function clearPreferencesForm(){
+	$('#username').value = $('#orig_username').value;
+	$('#useremail').value = $('#orig_useremail').value;
+}
+
+function validateAndUpdateUserPreferences(){
+	var new_uname = $('#username').value;
+	var new_email = $('#useremail').value;
+
+	if(strcmp(new_uname, '') == 0 || strcmp(new_email, '') == 0){
+		alert("Invalid value for Username and/or Email");
+	} else {
+		$('userPreferencesForm').submit();
+	}
+}

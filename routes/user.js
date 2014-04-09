@@ -108,6 +108,26 @@ exports.adduser = function (db) {
 	}
 };
 
+exports.updatePreferences = function(db){
+	return function(req, res){
+		var orig_uname = req.body.username;
+		var orig_email = req.body.useremail;
+		var new_uname = req.body.orig_username;
+		var new_email = req.body.orig_email;
+
+		db.collection(users).update({username: orig_uname, email: orig_email},
+			{ $set: { username: new_uname, email: new_email } },
+			function(err, doc){
+				if (err){
+					console.log(err);
+				} else {
+					res.location("index");
+					res.redirect("/home");
+				}
+			});
+	}
+}
+
 exports.logout = function(db){
 	return function(req, res){
 		res.clearCookie('user');

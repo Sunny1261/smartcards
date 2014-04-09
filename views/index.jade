@@ -14,8 +14,31 @@ block content
 						li.dropdown
 							a.dropdown-toggle(href="#" role="button" data-toggle="dropdown" id="user_button") #{user.username}
 							ul.dropdown-menu(role="menu" aria-labelledvy="user_button")
-								li: a(href="#" tabindex="-1" id="button1") Preferences Page
+								li: a(tabindex="-1" data-toggle="modal" data-target="#preferences") Preferences
 								li: a#logout(tabindex="-1" href="/logout") Logout
+
+	div.modal#preferences(tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display:none;")
+		//
+			div.modal-header
+				button.close(type="button" data-dismiss="modal" aria-hidden="true") X
+				h3#preferenceHeader 
+					Edit Preferences
+			form.preferences_form(id="userPreferencesForm" action="/updatePreferences" method="post" style="margin: 0;")
+				div.modal-body(style="padding: 25px;")
+					p Here are your current user preferences. Made any needed changes and hit 'Save Changes' to keep the new preferences. Otherwise, close the window or hit 'Cancel' to discard any unwanted changes.
+					b#pref_label Username
+					input#username(type="text" name="username" value="#{user.username}")
+					br
+					br
+					b#pref_label Email
+					input#useremail(type="text" name="useremail" value="#{user.email}")
+					br
+					br
+					input#orig_username(type="hidden" name="orig_username" value="#{user.username}")
+					input#orig_useremail(type="hidden" name="orig_email" value="#{user.email}")
+				div.modal-footer
+					button.btn-primary.btn.viewDeckBtn(data-dismiss="modal" aria-hidden="true" onclick="clearPreferencesForm()") Cancel
+					input.btn-primary.btn.viewDeckBtn(value="Save Changes" onclick="validateAndUpdateUserPreferences()")
 
 	div.content
 
