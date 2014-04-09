@@ -8,6 +8,7 @@ var routes = require('./routes');
 var user = require('./routes/user');
 var deck = require('./routes/deck');
 var card = require('./routes/card');
+var share = require('./routes/share');
 var http = require('http');
 var path = require('path');
 
@@ -55,6 +56,7 @@ app.post('/answercard', card.answercard(db));
 app.post('/adduser', user.adduser(db));
 app.post('/loginuser', user.login(db));
 app.post('/updatePreferences', user.updatePreferences(db));
+app.post('/share', share.shareDeck(db));
 
 
 http.createServer(app).listen(app.get('port'), function(){
