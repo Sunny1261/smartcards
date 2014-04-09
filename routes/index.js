@@ -32,7 +32,7 @@ exports.index = function (db) {
 							//console.log(declist);
 							//console.log(declist.length);
 
-							db.collection(cards).group(["deck"], {}, { "count" : 0 }, 
+							db.collection(cards).group(["deck"], {user: uname}, { "count" : 0 }, 
 								"function(curr, result){ result.count++; }",
 								function(err, results) {
 									if (err) {
