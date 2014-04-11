@@ -55,7 +55,7 @@ exports.addcard = function (db) {
 		if (cardKey && cardAns){
 
 			//	Query to insert a card into the database. 
-			db.collection(cards).insert({user: uname, deck: cardDeck, key: cardKey, answer: cardAns, queue: 1, active: 0}, function (err, result) {
+			db.collection(cards).insert({user: uname, deck: cardDeck, key: cardKey, answer: cardAns, queue: 1, active: 0, right: 0, wrong: 0}, function (err, result) {
 				if (err) {
 					console.log(err);
 				} else {
@@ -106,10 +106,16 @@ exports.answercard = function(db) {
 				console.log(err);
 			} else {
 				var newQueue = result.queue;
+				var cardRight = result.right;
+				var cardWrong = result.wrong;
+
 				if (result.answer === ans){
 					newQueue++;
+					cardRight++;
+
 				} else  {
 					newQueue = 1;
+					cardWrong++;
 				}
 
 				if (newQueue>5){
@@ -117,7 +123,7 @@ exports.answercard = function(db) {
 				}
 
 				// Query to update the card's active and queue values.
-				db.collection(cards).updateById(cardId, {$set:{queue:newQueue,active:0}}, function(err, result){
+				db.collection(cards).updateById(cardId, {$set:{queue:newQueue,active:0,right:cardRight,wrong:cardWrong}}, function(err, result){
 					if (err){
 						console.log(err);
 					} else {
