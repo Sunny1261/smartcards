@@ -5,6 +5,15 @@ function strcmp(s1, s2){
     return 0;  
 }
 
+function setDivColor(div_id, right, wrong){
+	var g = 0, r = 0, b = 0;
+	if(right + wrong > 0){
+		g = (right/(right+wrong))*255;
+		r = 255 - g;
+		$('#'+div_id).css("background-color", "rgb("+r+", "+g+", "+b+")");
+	}
+}
+
 function showRenameDeckForm(deck_id){
 	$('#deck-'+deck_id).hide();
 	$('#editDeck-'+deck_id).show();

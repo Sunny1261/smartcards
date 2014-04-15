@@ -121,7 +121,7 @@ tr.columns td {
 	height: 280px;
 	width: 200px;
 	text-align: center;
-	background-color: white;
+	background-color: rgba(255, 255, 255, .7);
 	-moz-border-radius: 15px;
 	border-radius: 15px;
 	display: inline-block;

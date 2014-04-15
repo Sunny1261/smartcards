@@ -23,7 +23,7 @@ block content
 		#cards
 			div.deckCards
 				each card, i in cardlist
-					div.deckShape(id="card-#{card._id}")
+					div.deckShape(id="card-#{card._id}" style="background-color: rgba(#{colors[card._id]['r']}, #{colors[card._id]['g']}, 0, .8);")
 						div.cardKey
 							h2 #{card.key}
 						div.cardAnswer(style="height: 30px;")
