@@ -43,6 +43,7 @@ app.get('/home', routes.index(db));
 app.get('/users', user.list);
 app.get('/viewdeck/:id', deck.deckview(db));
 app.get('/rundeck/:id', deck.rundeck(db));
+app.get('/searchUsers/:str', user.searchUsers(db));
 
 // Delete
 app.get('/deletedeck/:id', deck.deletedeck(db));

@@ -16,14 +16,35 @@ block content
 								li: a(href="#" tabindex="-1" id="button1") Preferences Page
 								li: a#logout(tabindex="-1" href="/logout") Logout
 	
+	div.modal#shareDeck(tabindex="-1" role="dialog" aria-labelledby="shareModal" aria-hidden="true" style="display:none; width: 650px; margin-left: -350px;")
+		div.modal-header
+			button.close(type="button" data-dismiss="modal" aria-hidden="true") X
+			h3#preferenceHeader.
+				Share Deck
+		form.shareDeckForm(id="shareDeckForm" action="/share" method="post" style="margin: 0 auto;")
+			div.modal-body(style="padding: 25px;")
+				p Here, you can search for and select a user to share your #{deck} deck with. Type a username into the box, hit search, select the correct user, and hit share to share the deck.
+				br
+				b#pref_label Username
+				input#user_str(type="text" name="targetname" placeholder="User to share with")
+				input.btn-primary.btn#searchUsersBtn(value="Search Users" onclick="searchUsersDisplayResults()")
+				br
+				br
+				div#userSearchResults
+				input(type="hidden", name="deck", value="#{deck}")
+			div.modal-footer
+				button.btn-primary.btn.viewDeckBtn(data-dismiss="modal" aria-hidden="true" onclick="clearShareForm()") Cancel
+				input.btn-primary.btn.viewDeckBtn#shareSubmit(value="Save Changes" onclick="shareDeckSubmitForm()" disabled="disabled")
+
 	div.content
 		h1 Deck: #{deck}
+			a(tabindex="-1" data-toggle="modal" data-target="#shareDeck"): input.btn-success.btn.viewDeckBtn(value="Share Deck" style="margin-left: 40px; margin-bottom: 10px;")
 			a(href="/rundeck/#{deck}"): input.btn-primary.btn.viewDeckBtn(value="Run Deck >>" style="margin-left: 40px; margin-bottom: 10px;")
 
 		#cards
 			div.deckCards
 				each card, i in cardlist
-					div.deckShape(id="card-#{card._id}" style="background-color: rgba(#{colors[card._id]['r']}, #{colors[card._id]['g']}, 0, .8);")
+					div.deckShape(id="card-#{card._id}")
 						div.cardKey
 							h2 #{card.key}
 						div.cardAnswer(style="height: 30px;")
@@ -62,10 +83,5 @@ block content
 							input(type="hidden" name="deck" value="#{deck}")
 							input.btn-primary.btn.viewDeckBtn(id="createCardSubmit" value="Create" onclick="saveNewCard()")
 							input.btn-primary.btn.viewDeckBtn(id="createCardCancel" value="Clear" onclick="clearCreateForm()")
-		#share
-			form(name="share", action="/share", method="post")
-				input(type="text", name="targetname", placeholder="User To Share With")
-				input(type="hidden", name="deck", value="#{deck}")
-				input(type="submit", value="Submit") 
 
 	div.footer

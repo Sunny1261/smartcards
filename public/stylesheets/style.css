@@ -97,8 +97,14 @@ a {
     float:left;
 }
 
-#username, #useremail {
+#username, #useremail, #user_str {
 	margin-left: 20px;
+	display: inline-block;
+}
+
+#userSearchResults {
+	width: 80%;
+	margin-left: 10%;
 }
 
 .btn {
@@ -121,7 +127,7 @@ tr.columns td {
 	height: 280px;
 	width: 200px;
 	text-align: center;
-	background-color: rgba(255, 255, 255, .7);
+	background-color: rgba(255, 255, 255, .8);
 	-moz-border-radius: 15px;
 	border-radius: 15px;
 	display: inline-block;
@@ -133,7 +139,7 @@ tr.columns td {
 	height: 280px;
 	width: 200px;
 	text-align: center;
-	background-color: white;
+	background-color: rgba(255, 255, 255, .8);
 	-moz-border-radius: 15px;
 	border-radius: 15px;
 	display: inline-block;
@@ -156,6 +162,13 @@ tr.columns td {
 	width: 160px;
 	padding: 5px;
 	margin-top: 5px;
+}
+
+.userResultBtn {
+	width: 160px;
+	padding: 5px;
+	margin-top: 5px;
+	display: block;
 }
 
 .cardKey {
@@ -226,4 +239,13 @@ tr.columns td {
 
 tr.runBtn td{
 	padding-top: 20px;
+}
+
+#searchUsersBtn {
+	margin-left: 20px;
+	margin-bottom: 10px;
+}
+
+.userResultBtn {
+	width: 100%;
 }

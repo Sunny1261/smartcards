@@ -128,6 +128,24 @@ exports.updatePreferences = function(db){
 	}
 }
 
+exports.searchUsers = function(db){
+	return function(req, res){
+		console.log("Search Users function");
+		console.log(req.param('str'));
+
+		db.collection(users).find({ username: { $regex: req.param('str'), $options: 'i' } }, {password: 0} ).toArray(function (err, userMatches){
+			res.contentType('json');
+			if (err){
+				console.log(err);
+				res.send({ error: "ERROR: "+err });
+			} else {
+				//console.log(userMatches);
+				res.send({ results: userMatches });
+			}
+		});
+	}
+}
+
 exports.logout = function(db){
 	return function(req, res){
 		res.clearCookie('user');

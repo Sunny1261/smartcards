@@ -27,7 +27,7 @@ exports.deckview = function (db)  {
 				if (err) {
 					console.log(err);
 				} else {
-					var cardColors = {};
+					/*var cardColors = {};
 
 					for(var i = 0; i < cardlist.length; i++){
 						cardColors[cardlist[i]._id] = {};
@@ -39,9 +39,9 @@ exports.deckview = function (db)  {
 							cardColors[cardlist[i]._id]['r'] = 255;
 							cardColors[cardlist[i]._id]['g'] = Math.round((1-ratio)*255);
 						}
-					}
+					}*/
 
-					res.render('viewdeck', {user: req.cookies.user, "deck": deckToShow, "cardlist": cardlist, "colors": cardColors});
+					res.render('viewdeck', {user: req.cookies.user, "deck": deckToShow, "cardlist": cardlist/*, "colors": cardColors*/});
 				}
 			});
 
