@@ -133,6 +133,7 @@ tr.columns td {
 	display: inline-block;
 	margin-right: 20px;
 	margin-top: 10px;
+	border: 2px solid black;
 }
 
 .newDeck {
@@ -248,4 +249,9 @@ tr.runBtn td{
 
 .userResultBtn {
 	width: 100%;
+}
+
+#performanceKey {
+	width: 100%;
+	text-align: left;
 }

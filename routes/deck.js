@@ -40,7 +40,7 @@ exports.deckview = function (db)  {
 							cardColors[cardlist[i]._id]['g'] = Math.round((1-ratio)*255);
 						}
 					}*/
-
+					res.cookie('cards', cardlist);
 					res.render('viewdeck', {user: req.cookies.user, "deck": deckToShow, "cardlist": cardlist/*, "colors": cardColors*/});
 				}
 			});

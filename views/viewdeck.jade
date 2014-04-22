@@ -39,12 +39,16 @@ block content
 	div.content
 		h1 Deck: #{deck}
 			a(tabindex="-1" data-toggle="modal" data-target="#shareDeck"): input.btn-success.btn.viewDeckBtn(value="Share Deck" style="margin-left: 40px; margin-bottom: 10px;")
+			input.btn-danger.btn.viewDeckBtn(id="perfToggle" value="Performance View: OFF" state="OFF" style="margin-left: 40px; margin-bottom: 10px; width: 240px;" onclick="togglePerformanceView()")
 			a(href="/rundeck/#{deck}"): input.btn-primary.btn.viewDeckBtn(value="Run Deck >>" style="margin-left: 40px; margin-bottom: 10px;")
 
-		#cards
+		div#performanceKey
+
+
+		div#cards
 			div.deckCards
 				each card, i in cardlist
-					div.deckShape(id="card-#{card._id}")
+					div.deckShape.liveCard(id="card-#{card._id}" name="#{card._id}" right="#{card.right}" wrong="#{card.wrong}")
 						div.cardKey
 							h2 #{card.key}
 						div.cardAnswer(style="height: 30px;")
