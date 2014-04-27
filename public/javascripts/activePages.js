@@ -203,10 +203,22 @@ function checkAndRevealAnswer(){
 	}
 	$('.currentCardSubmit').attr({'disabled': 'disabled'});
 	$(".revealAnswer").show();
+
+	$.ajax({
+		type: 'POST',
+		url: '/answercard',
+		data: $('#answercard').serialize(), 
+		success: function(response) { 
+			console.log(response);
+		},
+		error: function(err){
+			console.log(err);
+		}
+	});
 }
 
-function submitCardAnswer(){
-	document.getElementById('answercard').submit();
+function submitCardAnswer(deck_name){
+	window.location.href = "/rundeck/" + deck_name;
 }
 
 function clearPreferencesForm(){

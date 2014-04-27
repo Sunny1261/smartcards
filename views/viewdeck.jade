@@ -72,8 +72,8 @@ block content
 							input.editCardInput(type="text" name="answer" value="#{card.answer}" id="editAnswer-#{card._id}" onKeydown="Javascript: if (event.keyCode==13) saveCardChanges('#{card._id}');")
 							input(type="hidden" name="deck" value="#{deck}")
 							input(type="hidden" name="cardId" value="#{card._id}")
-							input.btn-primary.btn.viewDeckBtn(id="editCardSubmit-#{card._id}" value="Save Changes" onclick="saveCardChanges('#{card._id}')")
-							input.btn-primary.btn.viewDeckBtn(id="editCardCancel-#{card._id}" value="Cancel" onclick="hideEditForm('#{card._id}')")
+							input.btn-primary.btn.viewDeckBtn(id="editCardSubmit-#{card._id}" value="Save Changes" onclick="saveCardChanges('#{card._id}')" onKeydown="Javascript: if (event.keyCode==13) saveCardChanges('#{card._id}');")
+							input.btn-primary.btn.viewDeckBtn(id="editCardCancel-#{card._id}" value="Cancel" onclick="hideEditForm('#{card._id}')" onKeydown="Javascript: if (event.keyCode==13) hideEditForm('#{card._id}');")
 
 				div.deckShape(id="createCard")
 						div(style="padding-top: 17px; padding-bottom: 22px;")
@@ -85,7 +85,7 @@ block content
 							b(style="margin-left: -80px;") Correct Answer
 							input.editCardInput(type="text" name="answer" placeholder="Card Answer" id="newCardAnswer" onKeydown="Javascript: if (event.keyCode==13) saveNewCard();")
 							input(type="hidden" name="deck" value="#{deck}")
-							input.btn-primary.btn.viewDeckBtn(id="createCardSubmit" value="Create" onclick="saveNewCard()")
-							input.btn-primary.btn.viewDeckBtn(id="createCardCancel" value="Clear" onclick="clearCreateForm()")
+							input.btn-primary.btn.viewDeckBtn(id="createCardSubmit" value="Create" onclick="saveNewCard()" onKeydown="Javascript: if (event.keyCode==13) saveNewCard();")
+							input.btn-primary.btn.viewDeckBtn(id="createCardCancel" value="Clear" onclick="clearCreateForm()" onKeydown="Javascript: if (event.keyCode==13) clearCreateForm();")
 
 	div.footer

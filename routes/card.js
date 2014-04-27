@@ -126,12 +126,16 @@ exports.answercard = function(db) {
 				db.collection(cards).updateById(cardId, {$set:{queue:newQueue,active:0,right:cardRight,wrong:cardWrong}}, function(err, result){
 					if (err){
 						console.log(err);
-					} else {
-						res.location("viewcard");
-						res.redirect("/rundeck/" + deckName);
 					}
 				});
 			}
 		});
+	}
+};
+
+exports.gotonextcard = function(db) {
+	return function (req, res) {
+		res.location("viewcard");
+		res.redirect("/rundeck/" + deckName);
 	}
 };

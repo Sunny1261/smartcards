@@ -28,7 +28,7 @@ block content
 			div.currentCardAnswer
 				#checkanswer
 					form(id="answercard" name="answercard" action="/answercard" method="post")
-						input(type="text" autocomplete="off" id="userAnswer" name="answer" placeholder="Your Answer" style="width: 460px;")
+						input(type="text" autocomplete="off" id="userAnswer" name="answer" placeholder="Your Answer" style="width: 460px;" onKeydown="Javascript: if (event.keyCode==13) checkAndRevealAnswer();")
 						input(type="hidden" name="deck" value="#{deck}")
 						input(type="hidden" name="cardId" value="#{card._id}")
 						input(type="hidden" name="correctAnswer" id="correctAnswer" value="#{card.answer}")
@@ -41,6 +41,6 @@ block content
 				b The correct answer is
 				h2 #{card.answer}
 			div.nextQuestion
-				input.btn-success.btn.viewDeckBtn(value="Next Card" style="width: 470px; margin-top: 20px; margin-bottom: 20px;" onclick="submitCardAnswer()")
+				input.btn-success.btn.viewDeckBtn(value="Next Card" style="width: 470px; margin-top: 20px; margin-bottom: 20px;" onclick="submitCardAnswer('#{deck}')")
 
 	div.footer
