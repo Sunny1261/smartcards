@@ -40,31 +40,26 @@ function renameDeck(deck_id){
 
 function searchUsersDisplayResults(){
 	var user_string = document.getElementById('user_str').value;
-	console.log("search string = "+user_string);
+	//console.log("search string = "+user_string);
 	$.ajax({
 		url: "/searchUsers/"+user_string,
 		type: "get",
 		dataType: "json",
 		contentType: "application/json",
 
-		complete: function() {
-			//called when complete
-			console.log('process complete');
-		},
-
 		success: function(data) {
-		  	console.log(data['results']);
+		  	//console.log(data['results']);
 		  	var matches = data['results'];
 		  	var resultsHTML = '<h3>Which one?</h3>';
 
 		  	for(var i = 0; i < matches.length; i++){
-				console.log(matches[i]);
+				//console.log(matches[i]);
 		  		resultsHTML += '<a class="btn-primary btn userResultBtn" onclick="shareToUser(\''+matches[i]['username']+'\')"> '+matches[i]['username']+' </a>';
 		  	}
 
 		  	$('#userSearchResults').html(resultsHTML);
 
-		  	console.log('process success');
+		  	//console.log('process success');
 		},
 
 		error: function() {
@@ -93,6 +88,15 @@ function runDeckCheck(deck_name, card_count){
 	} else {
 		alert("No cards to run through!\nCreate cards to use");
 	}
+}
+
+function clearShareForm(){
+	document.getElementById('user_str').value = '';
+	$('#searchUsersBtn').removeAttr('disabled');
+	$('#shareSubmit').attr({'disabled': 'disabled'});
+	$('#userSearchResults').html('');
+
+
 }
 
 function togglePerformanceView(){
