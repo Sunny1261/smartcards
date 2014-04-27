@@ -19,15 +19,6 @@ function getCookie(NameOfCookie){
 	return null; 
 }
 
-function setDivColor(div_id, right, wrong){
-	var g = 0, r = 0, b = 0;
-	if(right + wrong > 0){
-		g = (right/(right+wrong))*255;
-		r = 255 - g;
-		$('#'+div_id).css("background-color", "rgb("+r+", "+g+", "+b+")");
-	}
-}
-
 function showRenameDeckForm(deck_id){
 	$('#deck-'+deck_id).hide();
 	$('#editDeck-'+deck_id).show();
@@ -95,6 +86,15 @@ function shareDeckSubmitForm(){
 	document.getElementById('shareDeckForm').submit();
 }
 
+function runDeckCheck(deck_name, card_count){
+	console.log(card_count);
+	if(card_count > 0){
+		window.location.href = "/rundeck/" + deck_name;
+	} else {
+		alert("No cards to run through!\nCreate cards to use");
+	}
+}
+
 function togglePerformanceView(){
 	var cards = document.getElementsByClassName('liveCard');
 	var state = strcmp(document.getElementById('perfToggle').attributes.state.value, "OFF") == 0 ? 0 : 1;
@@ -114,7 +114,7 @@ function togglePerformanceView(){
 			var right = parseInt(cards[i].attributes.right.value);
 			var wrong = parseInt(cards[i].attributes.wrong.value);
 			var rate = right/(right+wrong); 
-			if(right == 0 || wrong == 0){
+			if(right == 0 && wrong == 0){
 				$('#card-'+cards[i].attributes.name.value).css("background-color", "rgba(255, 255, 255, .8)");
 			} else if(rate <= .2){
 				// #FF0000

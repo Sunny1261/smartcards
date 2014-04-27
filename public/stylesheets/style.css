@@ -147,6 +147,7 @@ tr.columns td {
 	margin-right: 20px;
 	vertical-align: top;
 	margin-top: 10px;
+	border: 2px solid black;
 }
 
 .deckName {

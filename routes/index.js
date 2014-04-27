@@ -44,7 +44,12 @@ exports.index = function (db) {
 										for(var i = 0; i < results.length; i++){
 											rdyCnts[results[i].deck] = results[i].count;
 										}
-										//console.log(rdyCnts);
+
+										for(var i = 0; i < declist.length; i++){
+											if(rdyCnts[declist[i]['name']] == undefined)
+												rdyCnts[declist[i]['name']] = 0;
+										}
+										console.log(rdyCnts);
 
 										res.cookie('userDecks', declist);
 										res.cookie('count', rdyCnts);

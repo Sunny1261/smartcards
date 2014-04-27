@@ -40,7 +40,7 @@ block content
 		h1 Deck: #{deck}
 			a(tabindex="-1" data-toggle="modal" data-target="#shareDeck"): input.btn-success.btn.viewDeckBtn(value="Share Deck" style="margin-left: 40px; margin-bottom: 10px;")
 			input.btn-danger.btn.viewDeckBtn(id="perfToggle" value="Performance View: OFF" state="OFF" style="margin-left: 40px; margin-bottom: 10px; width: 240px;" onclick="togglePerformanceView()")
-			a(href="/rundeck/#{deck}"): input.btn-primary.btn.viewDeckBtn(value="Run Deck >>" style="margin-left: 40px; margin-bottom: 10px;")
+			input.btn-primary.btn.viewDeckBtn(value="Run Deck >>" onclick="runDeckCheck('#{deck}', #{cardlist.length})" style="margin-left: 40px; margin-bottom: 10px;")
 
 		div#performanceKey
 
@@ -66,10 +66,10 @@ block content
 							h2 Edit Card
 						form(id="editcardform-#{card._id}", action="/editcard", method="post")
 							b(style="margin-left: -80px;") Question / Key
-							input.editCardInput(type="text" name="key" value="#{card.key}" id="editKey-#{card._id}")
+							input.editCardInput(type="text" name="key" value="#{card.key}" id="editKey-#{card._id}" onKeydown="Javascript: if (event.keyCode==13) saveCardChanges('#{card._id}');")
 							br
 							b(style="margin-left: -80px;") Correct Answer
-							input.editCardInput(type="text" name="answer" value="#{card.answer}" id="editAnswer-#{card._id}")
+							input.editCardInput(type="text" name="answer" value="#{card.answer}" id="editAnswer-#{card._id}" onKeydown="Javascript: if (event.keyCode==13) saveCardChanges('#{card._id}');")
 							input(type="hidden" name="deck" value="#{deck}")
 							input(type="hidden" name="cardId" value="#{card._id}")
 							input.btn-primary.btn.viewDeckBtn(id="editCardSubmit-#{card._id}" value="Save Changes" onclick="saveCardChanges('#{card._id}')")
@@ -80,10 +80,10 @@ block content
 							h2 Create New Card
 						form(id="createcardform", action="/addcard", method="post")
 							b(style="margin-left: -80px;") Question / Key
-							input.editCardInput(type="text" name="key" placeholder="Card Key" id="newCardKey")
+							input.editCardInput(type="text" name="key" placeholder="Card Key" id="newCardKey" onKeydown="Javascript: if (event.keyCode==13) saveNewCard();")
 							br
 							b(style="margin-left: -80px;") Correct Answer
-							input.editCardInput(type="text" name="answer" placeholder="Card Answer" id="newCardAnswer")
+							input.editCardInput(type="text" name="answer" placeholder="Card Answer" id="newCardAnswer" onKeydown="Javascript: if (event.keyCode==13) saveNewCard();")
 							input(type="hidden" name="deck" value="#{deck}")
 							input.btn-primary.btn.viewDeckBtn(id="createCardSubmit" value="Create" onclick="saveNewCard()")
 							input.btn-primary.btn.viewDeckBtn(id="createCardCancel" value="Clear" onclick="clearCreateForm()")
