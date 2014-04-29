@@ -43,7 +43,7 @@
  									console.log("Inserting Cards for new user")
  									for (var i = 0; i < card.length; i++){
 
- 										db.collection(cards).insert({user: targetname, deck: deckname, key: card[i].key, answer: card[i].answer, queue: 1, active: 0}, function (err, result) {
+ 										db.collection(cards).insert({user: targetname, deck: deckname, key: card[i].key, answer: card[i].answer, queue: 1, active: 0, right: 0, wrong: 0}, function (err, result) {
 											if (err) {
 												console.log(err);
 											} 

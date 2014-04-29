@@ -34,7 +34,7 @@ block content
 				input(type="hidden", name="deck", value="#{deck}")
 			div.modal-footer
 				a.btn-primary.btn.viewDeckBtn(data-dismiss="modal" aria-hidden="true" onclick="clearShareForm()") Cancel
-				input.btn-primary.btn.viewDeckBtn#shareSubmit(value="Save Changes" onclick="shareDeckSubmitForm()" disabled="disabled")
+				input.btn-primary.btn.viewDeckBtn#shareSubmit(value="Share" onclick="shareDeckSubmitForm()" disabled="disabled")
 
 	div.content
 		h1 Deck: #{deck}
