@@ -200,14 +200,18 @@ function createNewDeck(){
 function checkAndRevealAnswer(){
 	var user_ans = document.getElementById('userAnswer').value;
 	var correct_ans = document.getElementById('correctAnswer').value;
+	var deck_name = document.getElementById('deckName').value;
 	if(strcmp(user_ans, correct_ans) == 0){
-		$(".result").html('<h2> CORRECT! :)</h2>');
+		$(".result").html('<h2> CORRECT</h2>');
 	} else {
-		$(".result").html('<h2> INCORRECT! :(</h2>');
+		$(".result").html('<h2> INCORRECT</h2>');
 	}
 	$('.currentCardSubmit').attr({'disabled': 'disabled'});
 	$(".revealAnswer").show();
-
+	console.log(deck_name);
+	document.getElementById('userAnswer').attributes.onkeydown.value="Javascript: if (event.keyCode==13) submitCardAnswer('" + deck_name + "');";
+	console.log('Run Function');
+	
 	$.ajax({
 		type: 'POST',
 		url: '/answercard',
