@@ -55,7 +55,7 @@ exports.addcard = function (db) {
 		if (cardKey && cardAns){
 
 			//	Query to insert a card into the database. 
-			db.collection(cards).insert({user: uname, deck: cardDeck, key: cardKey, answer: cardAns, queue: 1, active: 0, right: 0, wrong: 0}, function (err, result) {
+			db.collection(cards).insert({user: uname, deck: cardDeck, key: cardKey, answer: cardAns, queue: 1, active: 1, right: 0, wrong: 0}, function (err, result) {
 				if (err) {
 					console.log(err);
 				} else {
@@ -80,7 +80,7 @@ exports.editcard = function (db) {
 
 		//	Query to insert a card into the database. 
 		db.collection(cards).update({user: uname, deck: cardDeck, _id: o_id}, 
-			{$set : { answer: cardAns, key: cardKey, queue: 1, active: 0}},
+			{$set : { answer: cardAns, key: cardKey, queue: 1, active: 1}},
 			function (err, result) {
 				if (err) {
 					console.log(err);
